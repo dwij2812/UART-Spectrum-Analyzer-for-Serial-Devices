@@ -12,9 +12,9 @@ The following Script can be used to generate certain mathematical functions on a
 ## Instructions to run this application
 1. Make Sure Python3 is installed and added to PATH on your device. [Download Link for Python](https://www.python.org/downloads/).
 2. Navigate to the project directory and run 
-```bash 
-$ pip install -r requirements.txt
-```
+    ```bash 
+    $ pip install -r requirements.txt
+    ```
 *This will install all the dependencies needed to run this application.*
 
 3. Install the Cypress USB2UART Drivers which enable UART connections between the computer and our ZED device. [Download Link for Cypress USB2UART Drivers](https://www.cypress.com/documentation/software-and-drivers/microsoft-certified-usb-uart-driver).
@@ -24,9 +24,9 @@ $ pip install -r requirements.txt
 7. Right Click on it and use Run As > Launch On Hardware (Use GDB) option and wait till the operation finishes.
 8. Now our hardware is ready for use. Next we will now launch out python script.
 9. For this run the following command from the root of the project directory
-```bash
-$ python main.py
-```
+    ```bash
+    $ python main.py
+    ```
 10. The Application will soon launch and you will get a popup window requesting the parameters of the wave. Once entered you may either choose to just view the live visualization or carry out analysis on the output waveforms.
 11. The visualization options will yield a plot with all the computed parameters and keep updating in realtime as the data stream is constantly being recieved on the device from the ZEDboard.
 12. The analysis option waits untill a specific number of points are recieved and evaluated by the system as entered by the user and then reveals the plot screen with all the computed graphs alongwith appropriate cursors that help in analyzing the plots with ease. 
