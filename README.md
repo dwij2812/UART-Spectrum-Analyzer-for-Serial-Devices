@@ -16,6 +16,7 @@ The following Script can be used to generate certain mathematical functions on a
 1. Live plotting with Real-Time updates of all plots.
 2. Hoverable markers and points can be marked on the plots during runtime.
 3. Types of plots that can be plotted with this tool:
+
         i. Received Signal
         ii. Normal FFT
         iii. Real-Time FFT
@@ -28,6 +29,7 @@ The following Script can be used to generate certain mathematical functions on a
         x. Spectrogram of Signal
         xi. Periodogram of Signal (psd)
         xii. Power Spectral Density using Welch Normalization
+        
 4. Ability to adjust window size and plotting parameters anytime.
 
 ## Instructions to run this application
