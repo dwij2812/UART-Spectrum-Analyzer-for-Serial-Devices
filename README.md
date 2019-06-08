@@ -2,8 +2,6 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-yellow.svg?style=for-the-badge&logo=python)](https://python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-![Depfu](https://img.shields.io/depfu/dwij2812/UART-Spectrum-Analyzer-for-Serial-Devices.svg?style=for-the-badge)
-
 [![HitCount](http://hits.dwyl.io/dwij2812/UART-Spectrum-Analyzer-for-Serial-Devices.svg)](http://hits.dwyl.io/dwij2812/UART-Spectrum-Analyzer-for-Serial-Devices)
 
 
