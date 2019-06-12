@@ -1,68 +1,90 @@
+########################################################################################################
+########### Importing and Initializing Libraries Needed for this Script ################################
 from tkinter import *
 import serial
 import time
 import csv
 import matplotlib
-matplotlib.use("tkAgg")
+matplotlib.use( "tkAgg" )
 import matplotlib.pyplot as plt
 from matplotlib import style
-style.use("ggplot")
+style.use( "ggplot" )
 import numpy as np
 from scipy import fftpack
 from spectrum import *
 from matplotlib.widgets import Cursor
 print("Imported All Libraries")
+
+##### Establishing Serial Connection to ZedBoard #####
 ser = serial.Serial('COM3',115200)
 print("Serial Connection Started")
+
+##### Making a Tkinter Eindow to Take User Inputs #####
 window = Tk()
-window.title("Accord Software and Systems Pvt Ltd")
-window.geometry('600x300')
-title = Label(window,text="Frequency Generator and Visualizer", fg='Black', font=("Helvetica", 16))
-title.grid(row=0,columnspan=3)
+window.title("Accord Software and Systems Pvt Ltd") #Window Title
+window.geometry('600x300') #Window Default Size while Launching
+title = Label(window,text = "Frequency Generator and Visualizer", fg = 'Black', font = ("Helvetica", 16)) #Title Displayed Inside the Window
+title.grid(row = 0,columnspan = 3)
 subtitle = Label(window,text="Output: Asin(2πft)+B (Random Noise Function)", fg='Black', font=("Helvetica", 10))
 subtitle.grid(row=1,columnspan=3)
-########################################
+
+##### Field for collecting the amplitude value from user #####
 amplbl = Label(window, text="Amplitude (A)")
 amplbl.grid(column=0, row=2)
 amp = Entry(window,width=30)
 amp.grid(column=1, row=2)
-########################################
+
+##### Field for Collecting Frequency Value From User #####
 freqlbl = Label(window, text="Frequency (f)")
 freqlbl.grid(column=0, row=3)
 freq = Entry(window,width=30)
 freq.grid(column=1, row=3)
-##################################################################################################
+
+##### Field for collecting Sample Size from user #####
 samplelbl = Label(window, text="N of Samples Needed per Period(n)")
 samplelbl.grid(column=0,row=4)
 sample = Entry(window,width=30)
 sample.grid(column=1,row=4)
-##################################################################################################
+
+##### Field for Collecting Maximum Noise Amplitude from User #####
 noiselbl = Label(window, text="Enter Max Amplitude of Noise")
 noiselbl.grid(column=0,row=5)
 noise = Entry(window,width=30)
 noise.grid(column=1,row=5)
 pausing_flag=True
-##################################################################################################
+
+##### Field to collect the Number of Points a User is Wishing to Analyze #####
 pointslbl = Label(window, text="Enter No. Of. Points to collect Before Analysis (For Analysis Only)")
 pointslbl.grid(column=0, row=6)
 points_analysis = Entry(window,width=30)
 points_analysis.grid(column=1, row=6)
+
+##### Callback function for Visualization Option #####
 def clicked():
+
+    # Getting the Parameters to be sent to the Zedboard for making the signal
     a=amp.get()
     f=freq.get()
     n=sample.get()
     b=noise.get()
     print(a,f,n,b)
+
+    #Formatting it so it can be interpreted by the zedBoard
     s=a+" "+f+" "+n+" "+b+"\r\n"
+
+    #Sending the parameter String to Zedboard
     ser.write(s.encode())
-    #window.destroy()
     f=float(f)
     n=float(n)
     countervar=int(f*n)
     plot_window = countervar
     y_var = np.array(np.zeros([plot_window]))
     X = np.array(np.zeros([plot_window]))
+
+    #Turning ON Interactive mode for Plots
     plt.ion()
+
+    #Defining the Plots
     fig,ax = plt.subplots(nrows=4, ncols=3, figsize=(10, 10))
     ax[0,0].set_title("Recieved Signal")
     ax[0,1].set_title("FFT")
@@ -72,6 +94,7 @@ def clicked():
     ax[2, 0].set_title("Phase Spectrum ")
     ax[2, 1].set_title("Angle Spectrum")
 
+    #Setting the Plotting Variables
     line, = ax[0,0].plot(y_var,color='C7')
     line2, = ax[0,1].plot(X,color='C8')
     line3, = ax[0,2].plot(X,color='C9')
@@ -81,8 +104,11 @@ def clicked():
 
     f_s=f*n #This is the sampling Frequency
     counter=0
+
+    #Update the Plots infinitely 
     while pausing_flag:
         try:
+            # Reading Serial Data and storing it in a buffer before we plot the points
             ser.flush()
             ser_bytes = ser.readline()
             counter+=1
@@ -96,8 +122,12 @@ def clicked():
                 writer.writerow([time.time(),decoded_bytes])
             y_var = np.append(y_var,decoded_bytes)
             y_var = y_var[1:plot_window+1]
+
+            #Once Buffer is Ready we start the analysis and plotting of the Spectral Graphs
             if counter==100:
                 counter=0
+
+                ##### This is to plot the Graph of the Recieved Signal #####
                 line.set_ydata(y_var)
                 ax[0,0].relim()
                 ax[0,0].autoscale_view()
@@ -347,9 +377,12 @@ def clicked_with_limited():
     cursor11 = Cursor(ax[3,1], useblit=True, color='green', linewidth=1)
     cursor12 = Cursor(ax[3,2], useblit=True, color='green', linewidth=1)
     plt.show()
-#########################################################################################################################
+
+##### Button for Calling the Visualization Function #####
 btn = Button(window, text="Start Visualization in realtime", command=clicked)
 btn.grid(column=0, row=7)
+
+##### Button for Calling the Analysis Function #####
 btn2 = Button(window, text="Start Analysis", command=clicked_with_limited)
 btn2.grid(column=1, row=7)
 window.mainloop()
