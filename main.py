@@ -378,7 +378,11 @@ def clicked_with_limited():
         except:
             print("Keyboard Interrupt")
             break
+
+    # Turning Interactive Plot off For Static View
     plt.ioff()
+
+    # Adding Cursors to all lots for user convenience during measurements
     cursor = Cursor(ax[0, 0], useblit=True, color='green', linewidth=1)
     cursor2 = Cursor(ax[0, 1], useblit=True, color='green', linewidth=1)
     cursor3 = Cursor(ax[0, 2], useblit=True, color='green', linewidth=1)
@@ -391,6 +395,8 @@ def clicked_with_limited():
     cursor10 = Cursor(ax[3, 0], useblit=True, color='red', linewidth=1)
     cursor11 = Cursor(ax[3, 1], useblit=True, color='green', linewidth=1)
     cursor12 = Cursor(ax[3, 2], useblit=True, color='green', linewidth=1)
+
+    # Displaying Plot to the User
     plt.show()
 
 
@@ -401,4 +407,6 @@ btn.grid(column=0, row=7)
 ##### Button for Calling the Analysis Function #####
 btn2 = Button(window, text="Start Analysis", command=clicked_with_limited)
 btn2.grid(column=1, row=7)
+
+# The Tkinter Main loop to handle all the callbacks inside the Tkinter Window
 window.mainloop()
