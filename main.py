@@ -1,5 +1,5 @@
-########################################################################################################
-########### Importing and Initializing Libraries Needed for this Script ################################
+# #######################################################################################################
+# ########## Importing and Initializing Libraries Needed for this Script ################################
 from matplotlib.widgets import Cursor
 from spectrum import *
 from scipy import fftpack
@@ -15,54 +15,54 @@ matplotlib.use("tkAgg")
 style.use("ggplot")
 print("Imported All Libraries")
 
-##### Establishing Serial Connection to ZedBoard #####
+# #### Establishing Serial Connection to ZedBoard #####
 ser = serial.Serial('COM3', 115200)
 print("Serial Connection Started")
 
-##### Making a Tkinter Eindow to Take User Inputs #####
+# #### Making a Tkinter Eindow to Take User Inputs #####
 window = Tk()
 window.title("Accord Software and Systems Pvt Ltd")  # Window Title
 window.geometry('600x300')  # Window Default Size while Launching
-title = Label(window, text="Frequency Generator and Visualizer", fg='Black', font=(
+title = Label(window, text = "Frequency Generator and Visualizer", fg = 'Black', font = (
     "Helvetica", 16))  # Title Displayed Inside the Window
-title.grid(row=0, columnspan=3)
-subtitle = Label(window, text="Output: Asin(2πft)+B (Random Noise Function)",
-                 fg='Black', font=("Helvetica", 10))
-subtitle.grid(row=1, columnspan=3)
+title.grid(row = 0, columnspan = 3)
+subtitle = Label(window, text = "Output: Asin(2πft)+B (Random Noise Function)", 
+                 fg = 'Black', font = ("Helvetica", 10))
+subtitle.grid(row = 1, columnspan = 3)
 
-##### Field for collecting the amplitude value from user #####
-amplbl = Label(window, text="Amplitude (A)")
-amplbl.grid(column=0, row=2)
-amp = Entry(window, width=30)
-amp.grid(column=1, row=2)
+# #### Field for collecting the amplitude value from user #####
+amplbl = Label(window, text = "Amplitude (A)")
+amplbl.grid(column = 0, row = 2)
+amp = Entry(window, width = 30)
+amp.grid(column = 1, row = 2)
 
-##### Field for Collecting Frequency Value From User #####
-freqlbl = Label(window, text="Frequency (f)")
-freqlbl.grid(column=0, row=3)
-freq = Entry(window, width=30)
-freq.grid(column=1, row=3)
+# #### Field for Collecting Frequency Value From User #####
+freqlbl = Label(window, text = "Frequency (f)")
+freqlbl.grid(column = 0, row = 3)
+freq = Entry(window, width = 30)
+freq.grid(column = 1, row = 3)
 
-##### Field for collecting Sample Size from user #####
-samplelbl = Label(window, text="N of Samples Needed per Period(n)")
-samplelbl.grid(column=0, row=4)
-sample = Entry(window, width=30)
-sample.grid(column=1, row=4)
+# #### Field for collecting Sample Size from user #####
+samplelbl = Label(window, text = "N of Samples Needed per Period(n)")
+samplelbl.grid(column = 0, row = 4)
+sample = Entry(window, width = 30)
+sample.grid(column = 1, row = 4)
 
-##### Field for Collecting Maximum Noise Amplitude from User #####
-noiselbl = Label(window, text="Enter Max Amplitude of Noise")
-noiselbl.grid(column=0, row=5)
-noise = Entry(window, width=30)
-noise.grid(column=1, row=5)
+# #### Field for Collecting Maximum Noise Amplitude from User #####
+noiselbl = Label(window, text = "Enter Max Amplitude of Noise")
+noiselbl.grid(column = 0, row = 5)
+noise = Entry(window, width = 30)
+noise.grid(column = 1, row = 5)
 pausing_flag = True
 
-##### Field to collect the Number of Points a User is Wishing to Analyze #####
+# #### Field to collect the Number of Points a User is Wishing to Analyze #####
 pointslbl = Label(
-    window, text="Enter No. Of. Points to collect Before Analysis (For Analysis Only)")
-pointslbl.grid(column=0, row=6)
-points_analysis = Entry(window, width=30)
-points_analysis.grid(column=1, row=6)
+    window, text = "Enter No. Of. Points to collect Before Analysis (For Analysis Only)")
+pointslbl.grid(column = 0, row = 6)
+points_analysis = Entry(window, width = 30)
+points_analysis.grid(column = 1, row = 6)
 
-##### Callback function for Visualization Option #####
+# #### Callback function for Visualization Option #####
 
 
 def clicked():
@@ -90,7 +90,7 @@ def clicked():
     plt.ion()
 
     # Defining the Plots
-    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(10, 10))
+    fig, ax = plt.subplots(nrows = 4, ncols = 3, figsize = (10, 10))
     ax[0, 0].set_title("Recieved Signal")
     ax[0, 1].set_title("FFT")
     ax[0, 2].set_title("Real-time FFT")
@@ -100,9 +100,9 @@ def clicked():
     ax[2, 1].set_title("Angle Spectrum")
 
     # Setting the Plotting Variables
-    line, = ax[0, 0].plot(y_var, color='C7')
-    line2, = ax[0, 1].plot(X, color='C8')
-    line3, = ax[0, 2].plot(X, color='C9')
+    line, = ax[0, 0].plot(y_var, color = 'C7')
+    line2, = ax[0, 1].plot(X, color = 'C8')
+    line3, = ax[0, 2].plot(X, color = 'C9')
     line4, = ax[1, 2].plot(X)
     line5, = ax[2, 2].plot(X)
     line6, = ax[3, 2].plot(X)
@@ -124,7 +124,7 @@ def clicked():
             except:
                 continue
             with open("test_data.csv", "a") as f:
-                writer = csv.writer(f, delimiter=",")
+                writer = csv.writer(f, delimiter = ", ")
                 writer.writerow([time.time(), decoded_bytes])
             y_var = np.append(y_var, decoded_bytes)
             y_var = y_var[1:plot_window+1]
@@ -151,7 +151,7 @@ def clicked():
                 # fig.canvas.flush_events()
                 #######################################################################
                 X2 = fftpack.rfft(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 line3.set_ydata(np.abs(X2))
                 line3.set_xdata(np.abs(freqs))
                 ax[0, 2].relim()
@@ -160,22 +160,22 @@ def clicked():
                 # fig.canvas.flush_events()
                 #######################################################################
                 ax[1, 0].clear()
-                ax[1, 0].magnitude_spectrum(y_var, Fs=f_s, color='C1')
+                ax[1, 0].magnitude_spectrum(y_var, Fs = f_s, color = 'C1')
                 ax[1, 0].relim()
-                ax[1, 0].autoscale_view(tight=True)
+                ax[1, 0].autoscale_view(tight = True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 ax[1, 1].clear()
                 ax[1, 1].magnitude_spectrum(
-                    y_var, Fs=f_s, scale='dB', color='C2')
+                    y_var, Fs = f_s, scale = 'dB', color = 'C2')
                 ax[1, 1].relim()
                 ax[1, 1].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 #########################################################################
                 X3 = fftpack.dct(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 freqs = fftpack.fftfreq(len(y_var))
                 line4.set_ydata(np.abs(X3))
                 line4.set_xdata(np.abs(freqs))
@@ -185,21 +185,21 @@ def clicked():
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[2, 0].clear()
-                ax[2, 0].phase_spectrum(y_var, Fs=f_s, color='C3')
+                ax[2, 0].phase_spectrum(y_var, Fs = f_s, color = 'C3')
                 ax[2, 0].relim()
                 ax[2, 0].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[2, 1].clear()
-                ax[2, 1].angle_spectrum(y_var, Fs=f_s, color='C4')
+                ax[2, 1].angle_spectrum(y_var, Fs = f_s, color = 'C4')
                 ax[2, 1].relim()
                 ax[2, 1].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 X4 = fftpack.dst(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 freqs = fftpack.fftfreq(len(y_var))
                 line5.set_ydata(np.abs(X4))
                 line5.set_xdata(np.abs(freqs))
@@ -209,17 +209,17 @@ def clicked():
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[3, 0].clear()
-                ax[3, 0].specgram(y_var, Fs=f_s)
+                ax[3, 0].specgram(y_var, Fs = f_s)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 ax[3, 1].clear()
-                ax[3, 1].psd(y_var, NFFT=301, Fs=f_s, color='C5',
-                             pad_to=1024, scale_by_freq=True)
+                ax[3, 1].psd(y_var, NFFT = 301, Fs = f_s, color = 'C5', 
+                             pad_to = 1024, scale_by_freq = True)
                 ########################################################################
                 ax[3, 2].clear()
-                ax[3, 2].psd(y_var, NFFT=150, Fs=f_s, color='C6',
-                             pad_to=512, noverlap=75, scale_by_freq=True)
+                ax[3, 2].psd(y_var, NFFT = 150, Fs = f_s, color = 'C6', 
+                             pad_to = 512, noverlap = 75, scale_by_freq = True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 fig.canvas.draw()
@@ -227,7 +227,7 @@ def clicked():
         except:
             print("Keyboard Interrupt")
             break
-########################################################################################################################
+# #######################################################################################################################
 
 
 def clicked_with_limited():
@@ -246,7 +246,7 @@ def clicked_with_limited():
     y_var = np.array(np.zeros([plot_window]))
     X = np.array(np.zeros([plot_window]))
     plt.ion()
-    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(10, 10))
+    fig, ax = plt.subplots(nrows = 4, ncols = 3, figsize = (10, 10))
     ax[0, 0].set_title("Recieved Signal")
     ax[0, 1].set_title("FFT")
     ax[0, 2].set_title("Real-time FFT")
@@ -255,9 +255,9 @@ def clicked_with_limited():
     ax[2, 0].set_title("Phase Spectrum ")
     ax[2, 1].set_title("Angle Spectrum")
 
-    line, = ax[0, 0].plot(y_var, color='C7')
-    line2, = ax[0, 1].plot(X, color='C8')
-    line3, = ax[0, 2].plot(X, color='C9')
+    line, = ax[0, 0].plot(y_var, color = 'C7')
+    line2, = ax[0, 1].plot(X, color = 'C8')
+    line3, = ax[0, 2].plot(X, color = 'C9')
     line4, = ax[1, 2].plot(X)
     line5, = ax[2, 2].plot(X)
     line6, = ax[3, 2].plot(X)
@@ -278,7 +278,7 @@ def clicked_with_limited():
             except:
                 continue
             with open("test_data.csv", "a") as f:
-                writer = csv.writer(f, delimiter=",")
+                writer = csv.writer(f, delimiter = ", ")
                 writer.writerow([time.time(), decoded_bytes])
             y_var = np.append(y_var, decoded_bytes)
             y_var = y_var[1:plot_window+1]
@@ -301,7 +301,7 @@ def clicked_with_limited():
                 # fig.canvas.flush_events()
                 #######################################################################
                 X2 = fftpack.rfft(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 line3.set_ydata(np.abs(X2))
                 line3.set_xdata(np.abs(freqs))
                 ax[0, 2].relim()
@@ -310,22 +310,22 @@ def clicked_with_limited():
                 # fig.canvas.flush_events()
                 #######################################################################
                 ax[1, 0].clear()
-                ax[1, 0].magnitude_spectrum(y_var, Fs=f_s, color='C1')
+                ax[1, 0].magnitude_spectrum(y_var, Fs = f_s, color = 'C1')
                 ax[1, 0].relim()
-                ax[1, 0].autoscale_view(tight=True)
+                ax[1, 0].autoscale_view(tight = True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 ax[1, 1].clear()
                 ax[1, 1].magnitude_spectrum(
-                    y_var, Fs=f_s, scale='dB', color='C2')
+                    y_var, Fs = f_s, scale = 'dB', color = 'C2')
                 ax[1, 1].relim()
                 ax[1, 1].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 #########################################################################
                 X3 = fftpack.dct(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 freqs = fftpack.fftfreq(len(y_var))
                 line4.set_ydata(np.abs(X3))
                 line4.set_xdata(np.abs(freqs))
@@ -335,21 +335,21 @@ def clicked_with_limited():
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[2, 0].clear()
-                ax[2, 0].phase_spectrum(y_var, Fs=f_s, color='C3')
+                ax[2, 0].phase_spectrum(y_var, Fs = f_s, color = 'C3')
                 ax[2, 0].relim()
                 ax[2, 0].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[2, 1].clear()
-                ax[2, 1].angle_spectrum(y_var, Fs=f_s, color='C4')
+                ax[2, 1].angle_spectrum(y_var, Fs = f_s, color = 'C4')
                 ax[2, 1].relim()
                 ax[2, 1].autoscale_view()
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 X4 = fftpack.dst(y_var)
-                #freqs = fftpack.fftfreq(len(y_var),1/f_s) * f_s
+                #freqs = fftpack.fftfreq(len(y_var), 1/f_s) * f_s
                 freqs = fftpack.fftfreq(len(y_var))
                 line5.set_ydata(np.abs(X4))
                 line5.set_xdata(np.abs(freqs))
@@ -359,17 +359,17 @@ def clicked_with_limited():
                 # fig.canvas.flush_events()
                 #########################################################################
                 ax[3, 0].clear()
-                ax[3, 0].specgram(y_var, Fs=f_s)
+                ax[3, 0].specgram(y_var, Fs = f_s)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 ########################################################################
                 ax[3, 1].clear()
-                ax[3, 1].psd(y_var, NFFT=301, Fs=f_s, color='C5',
-                             pad_to=1024, scale_by_freq=True)
+                ax[3, 1].psd(y_var, NFFT = 301, Fs = f_s, color = 'C5', 
+                             pad_to = 1024, scale_by_freq = True)
                 ########################################################################
                 ax[3, 2].clear()
-                ax[3, 2].psd(y_var, NFFT=150, Fs=f_s, color='C6',
-                             pad_to=512, noverlap=75, scale_by_freq=True)
+                ax[3, 2].psd(y_var, NFFT = 150, Fs = f_s, color = 'C6', 
+                             pad_to = 512, noverlap = 75, scale_by_freq = True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
                 fig.canvas.draw()
@@ -383,30 +383,30 @@ def clicked_with_limited():
     plt.ioff()
 
     # Adding Cursors to all lots for user convenience during measurements
-    cursor = Cursor(ax[0, 0], useblit=True, color='green', linewidth=1)
-    cursor2 = Cursor(ax[0, 1], useblit=True, color='green', linewidth=1)
-    cursor3 = Cursor(ax[0, 2], useblit=True, color='green', linewidth=1)
-    cursor4 = Cursor(ax[1, 0], useblit=True, color='green', linewidth=1)
-    cursor5 = Cursor(ax[1, 1], useblit=True, color='green', linewidth=1)
-    cursor6 = Cursor(ax[1, 2], useblit=True, color='green', linewidth=1)
-    cursor7 = Cursor(ax[2, 0], useblit=True, color='green', linewidth=1)
-    cursor8 = Cursor(ax[2, 1], useblit=True, color='green', linewidth=1)
-    cursor9 = Cursor(ax[2, 2], useblit=True, color='green', linewidth=1)
-    cursor10 = Cursor(ax[3, 0], useblit=True, color='red', linewidth=1)
-    cursor11 = Cursor(ax[3, 1], useblit=True, color='green', linewidth=1)
-    cursor12 = Cursor(ax[3, 2], useblit=True, color='green', linewidth=1)
+    cursor = Cursor(ax[0, 0], useblit = True, color = 'green', linewidth = 1)
+    cursor2 = Cursor(ax[0, 1], useblit = True, color = 'green', linewidth = 1)
+    cursor3 = Cursor(ax[0, 2], useblit = True, color = 'green', linewidth = 1)
+    cursor4 = Cursor(ax[1, 0], useblit = True, color = 'green', linewidth = 1)
+    cursor5 = Cursor(ax[1, 1], useblit = True, color = 'green', linewidth = 1)
+    cursor6 = Cursor(ax[1, 2], useblit = True, color = 'green', linewidth = 1)
+    cursor7 = Cursor(ax[2, 0], useblit = True, color = 'green', linewidth = 1)
+    cursor8 = Cursor(ax[2, 1], useblit = True, color = 'green', linewidth = 1)
+    cursor9 = Cursor(ax[2, 2], useblit = True, color = 'green', linewidth = 1)
+    cursor10 = Cursor(ax[3, 0], useblit = True, color = 'red', linewidth = 1)
+    cursor11 = Cursor(ax[3, 1], useblit = True, color = 'green', linewidth = 1)
+    cursor12 = Cursor(ax[3, 2], useblit = True, color = 'green', linewidth = 1)
 
     # Displaying Plot to the User
     plt.show()
 
 
-##### Button for Calling the Visualization Function #####
-btn = Button(window, text="Start Visualization in realtime", command=clicked)
-btn.grid(column=0, row=7)
+# #### Button for Calling the Visualization Function #####
+btn = Button(window, text = "Start Visualization in realtime", command = clicked)
+btn.grid(column = 0, row = 7)
 
-##### Button for Calling the Analysis Function #####
-btn2 = Button(window, text="Start Analysis", command=clicked_with_limited)
-btn2.grid(column=1, row=7)
+# #### Button for Calling the Analysis Function #####
+btn2 = Button(window, text = "Start Analysis", command = clicked_with_limited)
+btn2.grid(column = 1, row = 7)
 
 # The Tkinter Main loop to handle all the callbacks inside the Tkinter Window
 window.mainloop()
