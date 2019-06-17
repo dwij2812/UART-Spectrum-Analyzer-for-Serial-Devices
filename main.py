@@ -14,6 +14,7 @@ import matplotlib
 import mplcursors
 matplotlib.use("tkAgg")
 style.use("ggplot")
+matplotlib.rcParams.update({'font.size': 6})
 print("Imported All Libraries")
 
 ##### Establishing Serial Connection to ZedBoard #####
@@ -91,14 +92,14 @@ def clicked():
     plt.ion()
 
     # Defining the Plots
-    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(16, 16))
-    ax[0, 0].set_title("Recieved Signal")
-    ax[0, 1].set_title("FFT")
-    ax[0, 2].set_title("Real-time FFT")
-    ax[1, 0].set_title("Magnitude Spectrum")
-    ax[1, 1].set_title("Log. Magnitude Spectrum")
-    ax[2, 0].set_title("Phase Spectrum ")
-    ax[2, 1].set_title("Angle Spectrum")
+    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(16, 16), constrained_layout=True)
+    #ax[0, 0].title.set_text("Recieved Signal")
+    #ax[0, 1].title.set_text("FFT")
+    #ax[0, 2].title.set_text("Real-time FFT")
+    #ax[1, 0].title.set_text("Magnitude Spectrum")
+    #ax[1, 1].title.set_text("Log. Magnitude Spectrum")
+    #ax[2, 0].title.set_text("Phase Spectrum ")
+    #ax[2, 1].title.set_text("Angle Spectrum")
 
     # Setting the Plotting Variables
     line, = ax[0, 0].plot(y_var, color='C7')
@@ -137,7 +138,6 @@ def clicked():
             # Once Buffer is Ready we start the analysis and plotting of the Spectral Graphs
             if counter == 100:
                 counter = 0
-
                 ##### This is to plot the Graph of the Recieved Signal #####
                 line.set_ydata(y_var)
                 ax[0, 0].relim()
@@ -227,6 +227,18 @@ def clicked():
                              pad_to=512, noverlap=75, scale_by_freq=True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
+                ax[0, 0].set_title("Recieved Signal")
+                ax[0, 1].set_title("FFT")
+                ax[0, 2].set_title("Real-time FFT")
+                ax[1, 0].set_title("Magnitude Spectrum")
+                ax[1, 1].set_title("Log. Magnitude Spectrum")
+                ax[1,2].set_title("Discrete Cosine Transform")
+                ax[2, 0].set_title("Phase Spectrum ")
+                ax[2, 1].set_title("Angle Spectrum")
+                ax[2,2].set_title("Discrete Sine Transform")
+                ax[3,0].set_title("Spectogram")
+                ax[3,1].set_title("Power Spectral Density")
+                ax[3,2].set_title("Power Spectral Density (Welch)")
                 fig.canvas.draw()
                 fig.canvas.flush_events()
         except:
@@ -251,14 +263,14 @@ def clicked_with_limited():
     y_var = np.array(np.zeros([plot_window]))
     X = np.array(np.zeros([plot_window]))
     plt.ion()
-    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(16, 16))
-    ax[0, 0].set_title("Recieved Signal")
-    ax[0, 1].set_title("FFT")
-    ax[0, 2].set_title("Real-time FFT")
-    ax[1, 0].set_title("Magnitude Spectrum")
-    ax[1, 1].set_title("Log. Magnitude Spectrum")
-    ax[2, 0].set_title("Phase Spectrum ")
-    ax[2, 1].set_title("Angle Spectrum")
+    fig, ax = plt.subplots(nrows=4, ncols=3, figsize=(16, 16), constrained_layout=True)
+    ax[0, 0].title.set_text("Recieved Signal")
+    ax[0, 1].title.set_text("FFT")
+    ax[0, 2].title.set_text("Real-time FFT")
+    ax[1, 0].title.set_text("Magnitude Spectrum")
+    ax[1, 1].title.set_text("Log. Magnitude Spectrum")
+    ax[2, 0].title.set_text("Phase Spectrum ")
+    ax[2, 1].title.set_text("Angle Spectrum")
 
     line, = ax[0, 0].plot(y_var, color='C7')
     line2, = ax[0, 1].plot(X, color='C8')
@@ -289,6 +301,13 @@ def clicked_with_limited():
             y_var = np.append(y_var, decoded_bytes)
             y_var = y_var[1:plot_window+1]
             if counter == 100:
+                ax[0, 0].set_title("Recieved Signal")
+                ax[0, 1].set_title("FFT")
+                ax[0, 2].set_title("Real-time FFT")
+                ax[1, 0].set_title("Magnitude Spectrum")
+                ax[1, 1].set_title("Log. Magnitude Spectrum")
+                ax[2, 0].set_title("Phase Spectrum ")
+                ax[2, 1].set_title("Angle Spectrum")
                 counter = 0
                 line.set_ydata(y_var)
                 ax[0, 0].relim()
@@ -377,6 +396,18 @@ def clicked_with_limited():
                              pad_to=512, noverlap=75, scale_by_freq=True)
                 # fig.canvas.draw()
                 # fig.canvas.flush_events()
+                ax[0, 0].set_title("Recieved Signal")
+                ax[0, 1].set_title("FFT")
+                ax[0, 2].set_title("Real-time FFT")
+                ax[1, 0].set_title("Magnitude Spectrum")
+                ax[1, 1].set_title("Log. Magnitude Spectrum")
+                ax[1,2].set_title("Discrete Cosine Transform")
+                ax[2, 0].set_title("Phase Spectrum ")
+                ax[2, 1].set_title("Angle Spectrum")
+                ax[2,2].set_title("Discrete Sine Transform")
+                ax[3,0].set_title("Spectogram")
+                ax[3,1].set_title("Power Spectral Density")
+                ax[3,2].set_title("Power Spectral Density (Welch)")
                 fig.canvas.draw()
                 fig.canvas.flush_events()
             points += 1
