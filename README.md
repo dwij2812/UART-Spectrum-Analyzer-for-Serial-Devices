@@ -16,19 +16,18 @@ The following Script can be used to generate certain mathematical functions on a
 1. Live plotting with Real-Time updates of all plots.
 2. Hoverable markers and points can be marked on the plots during runtime.
 3. Types of plots that can be plotted with this tool:
-
-        i. Received Signal
-        ii. Normal FFT
-        iii. Real-Time FFT
-        iv. Magnitude Spectrum
-        v. Log Magnitude Spectrum
-        vi. Discrete Cosine Transform
-        vii. Phase Spectrum
-        viii. Angle Spectrum
-        ix. Discrete Sine Transform
-        x. Spectrogram of Signal
-        xi. Periodogram of Signal (psd)
-        xii. Power Spectral Density using Welch Normalization
+    - Received Signal
+    - Normal FFT
+    - Real-Time FFT
+    - Magnitude Spectrum
+    - Log Magnitude Spectrum
+    - Discrete Cosine Transform
+    - Phase Spectrum
+    - Angle Spectrum
+    - Discrete Sine Transform
+    - Spectrogram of Signal
+    - Periodogram of Signal (psd)
+    - Power Spectral Density using Welch Normalization
         
 4. Ability to adjust window size and plotting parameters anytime.
 
@@ -38,7 +37,7 @@ The following Script can be used to generate certain mathematical functions on a
     ```bash
     $ pip install -r requirements.txt
     ```
-*This will install all the dependencies needed to run this application.*
+    *This will install all the dependencies needed to run this application.*
 
 3. Install the Cypress USB2UART Drivers which enable UART connections between the computer and our ZED device. [Download Link for Cypress USB2UART Drivers](https://www.cypress.com/documentation/software-and-drivers/microsoft-certified-usb-uart-driver).
 4. Open Xilinx SDK and load the hardware wrapper folder in it.
