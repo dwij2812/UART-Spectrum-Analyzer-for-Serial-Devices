@@ -1,0 +1,51 @@
+10:18:13 INFO  : Processing command line option -hwspec C:/Users/dwijsukesh.ks/project_3/project_3.sdk/design_1_wrapper.hdf.
+10:34:49 ERROR : Unable to establish socket connection to port 2350
+10:34:51 ERROR : Unable to establish communication with XMD at port 2350
+10:52:45 WARN  : Unable to obtain port 2350 for use by XMD, java.net.SocketException: Unrecognized Windows Sockets error: 0: JVM_Bind
+10:55:58 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+10:56:04 ERROR : Timeout occured while waiting to get reply for command "xdisable_digilent_plugin"
+10:56:05 WARN  : Error occured in disabling auto detect for digilent plugin.
+10:58:53 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+10:59:00 ERROR : Timeout occured while waiting to get reply for command "xconnect arm hw -cable type xilinx_tcf url TCP:127.0.0.1:3121 -debugdevice cpunr 1"
+11:04:17 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:04:21 ERROR : Timeout occured while waiting to get reply for command "xrjtag -cable type xilinx_tcf url TCP:127.0.0.1:3121"
+11:06:00 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:06:00 ERROR : Timeout occured while waiting to get reply for command "xrjtag -cable type xilinx_tcf url TCP:127.0.0.1:3121"
+11:08:53 INFO  : FPGA configured successfully with bitstream "C:/Users/dwijsukesh.ks/project_3/project_3.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+11:19:34 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:19:36 ERROR : Timeout occured while waiting to get reply for command "xconnect arm hw -cable type xilinx_tcf url TCP:127.0.0.1:3121 -debugdevice cpunr 1"
+11:21:13 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:21:13 ERROR : Timeout occured while waiting to get reply for command "set_cur_target 64"
+11:21:47 INFO  : FPGA Cable Disconnected. All active launches will be terminated.
+11:25:14 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:25:14 ERROR : Timeout occured while waiting to get reply for command "xload hw C:/Users/dwijsukesh.ks/project_3/project_3.sdk/design_1_wrapper_hw_platform_0/system.hdf"
+11:26:16 INFO  : FPGA configured successfully with bitstream "C:/Users/dwijsukesh.ks/project_3/project_3.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+11:29:35 INFO  : ps7_init is completed.
+11:29:35 INFO  : ps7_post_config is completed.
+11:29:35 INFO  : Processor reset is completed for ps7_cortexa9_0
+11:42:38 INFO  : Time out for XMD transaction is 60000
+If you want to increase the timeout value, goto Windows-> Preferences -> Xilinx SDK -> XMD Startup
+11:42:38 ERROR : Timeout occured while waiting to get reply for command "xfpga_isconfigured -cable type xilinx_tcf url TCP:127.0.0.1:3121"
+11:42:39 ERROR : Checking FPGA configuration failed..
+11:42:42 ERROR : Unexpected error while launching program.
+com.xilinx.sdk.targetmanager.TMException: 
+	at com.xilinx.sdk.targetmanager.internal.TM.isFPGAConfigured(TM.java:386)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.isFpgaConfigured(XilinxAppLaunchConfigurationDelegate.java:297)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.launch(XilinxAppLaunchConfigurationDelegate.java:245)
+	at com.xilinx.sdk.debug.ui.XilinxAppLaunchDelegateWrapper.launch(XilinxAppLaunchDelegateWrapper.java:31)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:855)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+11:43:52 INFO  : Processor reset is completed for ps7_cortexa9_0
+12:13:28 INFO  : Processor reset is completed for ps7_cortexa9_0
+12:13:35 INFO  : Memory regions updated for context APU
+12:13:38 INFO  : Application is downloaded for ps7_cortexa9_0. (C:\Users\dwijsukesh.ks\project_3\project_3.sdk\Getting_Started\Debug\Getting_Started.elf)
