@@ -2,7 +2,7 @@ appdirs==1.4.3
 astroid==2.2.5
 attrs==19.1.0
 Click==7.0
-colorama==0.4.1
+colorama==0.4.6
 cycler==0.10.0
 dill==0.2.9
 entrypoints==0.3
