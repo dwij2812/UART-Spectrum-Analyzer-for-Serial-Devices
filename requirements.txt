@@ -11,7 +11,7 @@ kiwisolver==1.1.0
 lazy-object-proxy==1.4.1
 matplotlib==3.1.0
 mccabe==0.6.1
-mplcursors==0.2.1
+mplcursors==0.5.3
 mpld3==0.3
 multiprocess==0.70.7
 numpy==1.16.4
