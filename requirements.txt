@@ -13,7 +13,7 @@ matplotlib==3.1.0
 mccabe==0.6.1
 mplcursors==0.2.1
 mpld3==0.3
-multiprocess==0.70.7
+multiprocess==0.70.16
 numpy==1.16.4
 pep8==1.7.1
 pyserial==3.4
