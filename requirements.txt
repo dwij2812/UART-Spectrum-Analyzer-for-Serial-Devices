@@ -4,7 +4,7 @@ attrs==19.1.0
 Click==7.0
 colorama==0.4.1
 cycler==0.10.0
-dill==0.2.9
+dill==0.3.8
 entrypoints==0.3
 isort==4.3.20
 kiwisolver==1.1.0
